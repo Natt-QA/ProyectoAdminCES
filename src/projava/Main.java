@@ -1,5 +1,4 @@
-import projava.Usuario;
-
+package projava;
 import java.util.Scanner;
 
 public class Main {
