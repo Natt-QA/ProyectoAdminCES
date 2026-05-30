@@ -1,4 +1,4 @@
-package projava;
+package model;
 import java.util.Scanner;
 
 public class Main {
@@ -7,6 +7,7 @@ public class Main {
     static String email;
     static String pais;
     static String contrasena;
+
     public static void main(String[] args) {
 
         int opcion;
@@ -17,7 +18,7 @@ public class Main {
             System.out.println("3- Salir");
             Scanner scan = new Scanner(System.in);
             opcion = scan.nextInt();
-            switch (opcion){
+            switch (opcion) {
                 case 1:
                     login();
                     break;
@@ -66,7 +67,7 @@ public class Main {
         System.out.println("Ingrese contraseña:");
         contrasena = scan.nextLine();
         while (contrasena == null || contrasena.equals("") || contrasena.length() < 8) {
-            System.out.println("La contraseña debe tener un mínimo de 7 caracteres, ingrese nuevamente la contraseña:");
+            System.out.println("La contraseña debe tener un mínimo de 8 caracteres, ingrese nuevamente la contraseña:");
             contrasena = scan.nextLine();
         }
         System.out.println("Registro exitoso:");
@@ -74,19 +75,20 @@ public class Main {
 
     private static void login() {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Ingrese nombre de usuario: ");
-        String nombreIngresado = scan.nextLine();
-        System.out.print("Ingrese Contraseña: ");
+
+        System.out.print("Ingrese email: ");
+        String emailIngresado = scan.nextLine();
+
+        System.out.print("Ingrese contraseña: ");
         String contrasenaIngresada = scan.nextLine();
 
-        if (nombreIngresado.equals(nombre)) {
+        if (emailIngresado.equals(email)) {
             if (contrasenaIngresada.equals(contrasena)) {
-                System.out.println("Usuario logueado con exito");
+                System.out.println("Usuario logueado con éxito");
             } else {
                 System.out.println("Contraseña incorrecta");
             }
-        }
-        else {
+        } else {
             System.out.println("No existe el usuario en el sistema.");
         }
     }

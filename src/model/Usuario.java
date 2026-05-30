@@ -1,4 +1,4 @@
-package projava;
+package model;
 
 public class Usuario {
 
