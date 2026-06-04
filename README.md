@@ -63,38 +63,38 @@ classDiagram
         -pais: String
         -contrasena: String
         +Usuario(nombre, apellido, email, pais, contrasena)
-        +getNombre(): String
-        +getApellido(): String
-        +getEmail(): String
-        +getPais(): String
-        +getContrasena(): String
+        +getNombre() String
+        +getApellido() String
+        +getEmail() String
+        +getPais() String
+        +getContrasena() String
         +setNombre(nombre: String)
         +setApellido(apellido: String)
         +setEmail(email: String)
         +setPais(pais: String)
         +setContrasena(contrasena: String)
-        +getRol(): String
+        +getRol() String
     }
 
     class Admin {
         +Admin(nombre, apellido, email, pais, contrasena)
-        +getRol(): String
+        +getRol() String
     }
 
     class Tester {
         -tipoTester: String
         +Tester(nombre, apellido, email, pais, contrasena, tipoTester)
-        +getTipoTester(): String
+        +getTipoTester() String
         +setTipoTester(tipo: String)
-        +getRol(): String
+        +getRol() String
     }
 
     class SistemaUsuarios {
         -usuarios: Usuario[]
         +SistemaUsuarios()
-        +existeEmail(email: String): boolean
-        +buscarPorEmail(email: String): Usuario
-        +login(email: String, contrasena: String): Usuario
+        +existeEmail(email: String) boolean
+        +buscarPorEmail(email: String) Usuario
+        +login(email: String, contrasena: String) Usuario
         +registrarAdmin(nombre, apellido, email, pais, contrasena)
         +registrarTester(nombre, apellido, email, pais, contrasena, tipoTester)
         +listarUsuarios()
