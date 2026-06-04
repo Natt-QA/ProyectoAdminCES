@@ -48,3 +48,64 @@ Se creó la clase `Usuario` con atributos básicos:
 * email
 * país
 * contraseña
+
+
+
+
+## Diagrama de clases UML
+
+```mermaid
+classDiagram
+    class Usuario {
+        -nombre: String
+        -apellido: String
+        -email: String
+        -pais: String
+        -contrasena: String
+        +Usuario(nombre, apellido, email, pais, contrasena)
+        +getNombre(): String
+        +getApellido(): String
+        +getEmail(): String
+        +getPais(): String
+        +getContrasena(): String
+        +setNombre(nombre: String)
+        +setApellido(apellido: String)
+        +setEmail(email: String)
+        +setPais(pais: String)
+        +setContrasena(contrasena: String)
+        +getRol(): String
+    }
+
+    class Admin {
+        +Admin(nombre, apellido, email, pais, contrasena)
+        +getRol(): String
+    }
+
+    class Tester {
+        -tipoTester: String
+        +Tester(nombre, apellido, email, pais, contrasena, tipoTester)
+        +getTipoTester(): String
+        +setTipoTester(tipo: String)
+        +getRol(): String
+    }
+
+    class SistemaUsuarios {
+        -usuarios: Usuario[]
+        +SistemaUsuarios()
+        +existeEmail(email: String): boolean
+        +buscarPorEmail(email: String): Usuario
+        +login(email: String, contrasena: String): Usuario
+        +registrarAdmin(nombre, apellido, email, pais, contrasena)
+        +registrarTester(nombre, apellido, email, pais, contrasena, tipoTester)
+        +listarUsuarios()
+    }
+
+    class Main {
+        +main(String[])
+    }
+
+    Usuario <|-- Admin
+    Usuario <|-- Tester
+    SistemaUsuarios o-- Usuario
+    Main --> SistemaUsuarios
+```
