@@ -6,6 +6,7 @@ public class Admin extends Usuario {
         super(nombre, apellido, email, pais, contrasena);
     }
 
+    @Override
     public String getRol() {
         return "ADMIN";
     }

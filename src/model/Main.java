@@ -13,7 +13,9 @@ public class Main {
             System.out.println("Elija una opción");
             System.out.println("1- Login");
             System.out.println("2- Registro");
-            System.out.println("3- Salir");
+            System.out.println("3- Listar usuarios");
+            System.out.println("4- Buscar usuario");
+            System.out.println("5- Salir");
             Scanner scan = new Scanner(System.in);
             opcion = scan.nextInt();
             switch (opcion) {
@@ -23,12 +25,18 @@ public class Main {
                 case 2:
                     registro();
                     break;
+                case 3:
+                    sistema.listarUsuarios();
+                    break;
+                case 4:
+                    buscarUsuario();
+                    break;
                 default:
                     System.out.println("Saliendo...");
-                    opcion = 3;
+                    opcion = 5;
                     break;
             }
-        } while (opcion != 3);
+        } while (opcion != 5);
     }
 
     private static void registro() {
@@ -69,8 +77,33 @@ public class Main {
             contrasena = scan.nextLine();
         }
 
-        sistema.registrarAdmin(nombre, apellido, email, pais, contrasena);
-        System.out.println("Registro exitoso:");
+        System.out.println("Ingrese tipo de usuario:");
+        System.out.println("1- Admin");
+        System.out.println("2- Tester");
+        int tipo = scan.nextInt();
+
+        if (tipo == 1) {
+            sistema.registrarAdmin(nombre, apellido, email, pais, contrasena);
+            System.out.println("Registro exitoso.");
+        } else if (tipo == 2) {
+            System.out.println("Ingrese tipo de Tester:");
+            System.out.println("1- Junior");
+            System.out.println("2- Semi-Senior");
+            System.out.println("3- Senior");
+            int tipoTesterOpcion = scan.nextInt();
+            String tipoTester;
+            if (tipoTesterOpcion == 1) {
+                tipoTester = "Junior";
+            } else if (tipoTesterOpcion == 2) {
+                tipoTester = "Semi-Senior";
+            } else {
+                tipoTester = "Senior";
+            }
+            sistema.registrarTester(nombre, apellido, email, pais, contrasena, tipoTester);
+            System.out.println("Registro exitoso.");
+        } else {
+            System.out.println("Opción inválida. No se registró ningún usuario.");
+        }
     }
 
     private static void login() {
@@ -91,6 +124,20 @@ public class Main {
             }
         } else {
             System.out.println("Usuario logueado con éxito");
+        }
+    }
+
+    private static void buscarUsuario() {
+        Scanner scan = new Scanner(System.in);
+
+        System.out.print("Ingrese email a buscar: ");
+        String email = scan.nextLine();
+
+        Usuario u = sistema.buscarPorEmail(email);
+        if (u == null) {
+            System.out.println("No existe un usuario con ese email.");
+        } else {
+            System.out.println(u.getRol() + " | " + u.getNombre() + " " + u.getApellido() + " | " + u.getEmail());
         }
     }
 }

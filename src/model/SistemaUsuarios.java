@@ -1,37 +1,31 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SistemaUsuarios {
 
-    private ArrayList<Usuario> usuarios;
+    private Map<String, Usuario> usuarios;
 
     public SistemaUsuarios() {
-        usuarios = new ArrayList<>();
+        usuarios = new HashMap<>();
         cargarUsuariosPrueba();
     }
 
     private void cargarUsuariosPrueba() {
-        usuarios.add(new Tester("Natalia", "Tester", "tallica.cs@gmail.com", "Uruguay", "12345", "Senior"));
-        usuarios.add(new Admin("Natalia", "Larrondo", "larrondo.nat@gmail.com", "Uruguay", "1234"));
+        Tester t1 = new Tester("Natalia", "Tester", "tallica.cs@gmail.com", "Uruguay", "12345", "Senior");
+        usuarios.put(t1.getEmail().toLowerCase(), t1);
+
+        Admin a1 = new Admin("Natalia", "Larrondo", "larrondo.nat@gmail.com", "Uruguay", "1234");
+        usuarios.put(a1.getEmail().toLowerCase(), a1);
     }
 
     public boolean existeEmail(String email) {
-        for (Usuario u : usuarios) {
-            if (u.getEmail().equalsIgnoreCase(email)) {
-                return true;
-            }
-        }
-        return false;
+        return usuarios.containsKey(email.toLowerCase());
     }
 
     public Usuario buscarPorEmail(String email) {
-        for (Usuario u : usuarios) {
-            if (u.getEmail().equalsIgnoreCase(email)) {
-                return u;
-            }
-        }
-        return null;
+        return usuarios.get(email.toLowerCase());
     }
 
     public Usuario login(String email, String contrasena) {
@@ -46,20 +40,22 @@ public class SistemaUsuarios {
     }
 
     public void registrarAdmin(String nombre, String apellido, String email, String pais, String contrasena) {
-        usuarios.add(new Admin(nombre, apellido, email, pais, contrasena));
+        Admin nuevo = new Admin(nombre, apellido, email, pais, contrasena);
+        usuarios.put(nuevo.getEmail().toLowerCase(), nuevo);
     }
 
     public void registrarTester(String nombre, String apellido, String email, String pais, String contrasena, String tipoTester) {
-        usuarios.add(new Tester(nombre, apellido, email, pais, contrasena, tipoTester));
+        Tester nuevo = new Tester(nombre, apellido, email, pais, contrasena, tipoTester);
+        usuarios.put(nuevo.getEmail().toLowerCase(), nuevo);
     }
 
     public void listarUsuarios() {
-        for (Usuario u : usuarios) {
+        for (Usuario u : usuarios.values()) {
             System.out.println(u.getRol() + " | " + u.getNombre() + " " + u.getApellido() + " | " + u.getEmail());
         }
     }
 
-    public ArrayList<Usuario> getUsuarios() {
+    public Map<String, Usuario> getUsuarios() {
         return usuarios;
     }
 }

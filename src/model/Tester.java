@@ -12,6 +12,7 @@ public class Tester extends Usuario {
     public String getTipoTester() { return tipoTester; }
     public void setTipoTester(String tipo) { this.tipoTester = tipo; }
 
+    @Override
     public String getRol() {
         return "TESTER (" + tipoTester + ")";
     }
